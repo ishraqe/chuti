@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { Router, Scene, Stack } from "react-native-router-flux";
 
-import INScreen from "../screens/InitialScreen";
+import INScreen from "../screens/InitialScreen/InitialScreen";
 import HomeScreen from "../screens/HomeScreen/HomeScreen";
 import PlaceListScreen from "../screens/PlaceList/PlaceListScreen";
 import PlaceDesc from '../screens/PlaceDesc/PlaceDesc';
@@ -29,9 +29,12 @@ const routes = props => {
     >
       <Stack key="root" hideNavBar={true}>
         <Stack key="first">
-          {/* <Scene key="initial_screen" hideNavBar={true} component={INScreen} /> */}
+          <Scene 
+            key="initial_screen" 
+            hideNavBar={true} 
+            component={INScreen} 
+          />
           <Scene
-            initial
             title="Home"
             key="home_screen"
             component={HomeScreen}
