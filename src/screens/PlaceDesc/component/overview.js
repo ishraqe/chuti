@@ -63,19 +63,21 @@ class overview extends Component {
   makeBookmark = (props) => {
     const oldBookmarkData = this.state.bookmarkData;
     const id = props.id;
-    const data = {
+    const newdata = {
       [id] : {
         id: props.id,
         description: props.description,
         guide: props.guide,
-        imageUrls: props.imageUrls
+        imageUrls: props.imageUrls,
+        name:props.placename
       }
     }
-    util.set('bookmark',data)
+    let updateData = [...oldBookmarkData,newdata];
+    util.set('bookmark',updateData);
   }
   renderBookmarkIcon= (props) => {
     console.log(this.state.bookmarkData,'not')
-    if(this.state.bookmarkData) {
+    if(typeof this.state.bookmarkData !== 'undefined' && this.state.bookmarkData.length > 0) {
       const id = props.id;
       let isExists = this.state.bookmarkData.some(el=> {
         return el.hasOwnProperty(id);
@@ -107,6 +109,18 @@ class overview extends Component {
         </TouchableOpacity>
       )
     }
+    return (
+      <TouchableOpacity
+        style={styles.iconStyle}
+        onPress={() => this.makeBookmark(props)}
+      >
+        <Icon 
+          name="md-heart-outline"
+          size={35} 
+          color="red" 
+        />
+      </TouchableOpacity>
+    )
   }  
   render() {
     const sliderHeight = Math.round(styles.sliderHeight+20);

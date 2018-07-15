@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ActionButton from "react-native-action-button";
 import Icon from "react-native-vector-icons/EvilIcons";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Text } from "react-native";
 import PlaceBox from "../../component/PlaceBox/PlaceBox";
-import { getPlacesById } from "../../store/actions";
+import { getAllBookmarkPlace } from "../../store/actions";
 import styles from "./styles";
 import { Actions } from "react-native-router-flux";
 
-class PlaceListScreen extends Component {
+class BookmarkScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,8 +17,7 @@ class PlaceListScreen extends Component {
     };
   }
   componentDidMount() {
-    const id = this.props.place_id;
-    this.props.getPlacesList(id);
+    this.props.getBookmarkedPlacesList();
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.placesList !== prevState.placeInfo) {
@@ -30,23 +29,25 @@ class PlaceListScreen extends Component {
   }
   renderPlaceList = () => {
     if (this.state.placeInfo) { 
-      console.log(this.state.placeInfo,'info');     
+      console.log(this.state.placeInfo,'info');    
       return this.state.placeInfo.map(eachPlace => {
-        return (
-          <PlaceBox
-            key={eachPlace.id}
-            place={eachPlace.info}
-            onPress={() => {
-             Actions.push('description_screen',{
-              imageUrls: eachPlace.info.imageUrls, 
-              desc: eachPlace.info.desc, 
-              guide: eachPlace.info.guide,
-              id: eachPlace.id,
-              placename: eachPlace.info.name
-            })
-            }}  
-          />
-        );
+        for (var key in eachPlace) {
+            console.log(eachPlace[key],'bookmark screen');
+           return (
+                <PlaceBox
+                    key={eachPlace[key].id}
+                    place={eachPlace[key]}
+                    onPress={() => {
+                    Actions.push('description_screen',{
+                        imageUrls: eachPlace[key].imageUrls, 
+                        desc: eachPlace[key].desc, 
+                        guide: eachPlace[key].guide,
+                        id: eachPlace[key].id
+                        })
+                    }}  
+                />
+            );
+        }
       });
     }
   };
@@ -56,25 +57,16 @@ class PlaceListScreen extends Component {
         <ScrollView>
           <View style={styles.listContainer}>{this.renderPlaceList()}</View>
         </ScrollView>
-        <ActionButton buttonColor="rgba(231,76,60,1)">
-          <ActionButton.Item
-            buttonColor="#3498db"
-            title="Bookmarks"
-            onPress={() => {Actions.push('bookmark_screen')}}
-          >
-            <Icon name="tag" size={35} color="#fff" />
-          </ActionButton.Item>
-        </ActionButton>
       </View>
     );
   }
 }
-PlaceListScreen.propTypes = {
+BookmarkScreen.propTypes = {
   placesList: PropTypes.array
 };
 
 const mapStateToProps = ({ info }) => {
-  const placesList = info.placesById;
+  const placesList = info.bookmarkedPlaces;
   console.log(placesList,'single place')
   return {
     placesList
@@ -83,8 +75,8 @@ const mapStateToProps = ({ info }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPlacesList: id => dispatch(getPlacesById(id))
+    getBookmarkedPlacesList: () => dispatch(getAllBookmarkPlace())
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlaceListScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(BookmarkScreen);

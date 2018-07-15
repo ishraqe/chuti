@@ -19,6 +19,7 @@ import {
 } from '../../styles/globalStyles';
 
 const PlaceDesc =(props) => {
+    console.log(props.placename,'desc');
     return (
         <Tabs
             tabBarPosition='bottom'
@@ -38,6 +39,7 @@ const PlaceDesc =(props) => {
         >
             <Overview 
                 tabLabel="Overview"  
+                placename={props.placename}
                 description={props.desc} 
                 imageUrls = {props.imageUrls}
                 id= { props.id}

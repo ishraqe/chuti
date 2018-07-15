@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   FlatList,
   Image,
   TouchableOpacity,
@@ -11,7 +10,6 @@ import {
 import styles from "./styles";
 import ActionButton from "react-native-action-button";
 import Icon from "react-native-vector-icons/EvilIcons";
-import * as Animatable from "react-native-animatable";
 import { connect } from "react-redux";
 import propTypes from "prop-types";
 import { Actions } from "react-native-router-flux";
@@ -95,7 +93,7 @@ class HomeScreen extends Component {
           <ActionButton.Item
             buttonColor="#3498db"
             title="Bookmarks"
-            onPress={() => {}}
+            onPress={() => {Actions.push('bookmark_screen')}}
           >
             <Icon name="tag" size={35} color="#fff" />
           </ActionButton.Item>

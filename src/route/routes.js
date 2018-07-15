@@ -6,6 +6,8 @@ import INScreen from "../screens/InitialScreen/InitialScreen";
 import HomeScreen from "../screens/HomeScreen/HomeScreen";
 import PlaceListScreen from "../screens/PlaceList/PlaceListScreen";
 import PlaceDesc from '../screens/PlaceDesc/PlaceDesc';
+import BookmarkScreen from '../screens/BookmarkScreen/BookmarkScreen';
+
 
 import {
   primaryFontColor,
@@ -49,6 +51,11 @@ const routes = props => {
             title="Description"
             key="description_screen"
             component={PlaceDesc}
+          />
+          <Scene
+            title="Bookmarks"
+            key="bookmark_screen"
+            component={BookmarkScreen}
           />
         </Stack>
       </Stack>

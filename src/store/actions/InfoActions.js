@@ -1,13 +1,11 @@
 import { 
   FETCH_DIVISION_LIST,
-  PLACES_BY_ID, 
   FETCH_PLACE_BY_ID,
-  SEARCH_RESULT,
-  SEARCH_RESULT_FOUND,
-  SEARCH_RESULT_NOT_FOUND
+  FETCH_PLACE_FROM_BOOKMARK
 } from "./types";
 import _ from "lodash";
 import firebase from 'firebase';
+import {AsyncStorage} from 'react-native';
 
 export const getDivisionList = () => {
   return (dispatch) => {
@@ -44,3 +42,13 @@ export const getPlacesById = id => {
     });
 };
 };
+
+export const getAllBookmarkPlace = () => {
+  return (dispatch) => {
+    AsyncStorage.getItem('bookmark').then(res => {
+      const parsedData = JSON.parse(res);
+      console.log(parsedData, 'parsed')
+      dispatch({ type: FETCH_PLACE_FROM_BOOKMARK, payload: parsedData});
+    });
+  }
+}

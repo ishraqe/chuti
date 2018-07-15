@@ -1,9 +1,15 @@
-import { INFO, FETCH_DIVISION_LIST, FETCH_PLACE_BY_ID } from "../actions/types";
+import { 
+  INFO, 
+  FETCH_DIVISION_LIST, 
+  FETCH_PLACE_BY_ID,
+  FETCH_PLACE_FROM_BOOKMARK
+} from "../actions/types";
 
 const INITIAL_STATE = {
   info: null,
   divisionList: null,
-  placesById: null
+  placesById: null,
+  bookmarkedPlaces: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -13,7 +19,11 @@ export default (state = INITIAL_STATE, action) => {
     case FETCH_DIVISION_LIST:
       return { ...state, divisionList: action.payload };
     case FETCH_PLACE_BY_ID:
+    console.log(action.payload,'places');
       return { ...state, placesById: action.payload };
+    case FETCH_PLACE_FROM_BOOKMARK:
+    console.log(action.payload,'reducer');
+    return { ...state, bookmarkedPlaces: action.payload };  
     default:
       return state;
   }
