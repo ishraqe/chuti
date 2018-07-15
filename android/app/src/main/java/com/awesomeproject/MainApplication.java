@@ -10,7 +10,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.brentvatne.react.ReactVideoPackage;
-
+import com.airbnb.android.react.lottie.LottiePackage;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,7 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new SvgPackage(),
             new VectorIconsPackage(),
-            new ReactVideoPackage()
+            new ReactVideoPackage(),
+            new LottiePackage()
       );
     }
 

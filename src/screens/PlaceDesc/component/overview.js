@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   View,
@@ -17,81 +17,99 @@ import styles from '../styles';
 import SliderDot from './sliderDot';
 import util from '../../../utils';
 
-renderSliderImages = (images) => {
-  return images.map((eachImage, index) => {
-    return (
-      <Image
-        key={index}
-        source={{uri: eachImage}}
-        style={styles.slider}
-        resizeMode={'cover'}
-      />
-    )
-  })
-}
-get = async() => {
-  console.log('get called');
-  let val =  await AsyncStorage.getItem('bookmark');
-  let parsed = JSON.parse(val);
-}
-renderSlider =(images)=>{
-     return (
-          <Swiper
-            loop={false}
-            bounces={true}
-            dot={<SliderDot />}
-            activeDot={<SliderDot active />}
-            paginationStyle={{ bottom: 5 }}
-          >
-            { this.renderSliderImages(images) }
-          </Swiper>
-        )
-}
-makeBookmark = (props) => {
-  const id = props.id;
-  const data = {
-    [id] : {
-      id: props.id,
-      description: props.description,
-      guide: props.guide,
-      imageUrls: props.imageUrls
+class overview extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bookmarkData : [],
+      isBookmarked: false
     }
   }
-  util.set('bookmark',data)
-}
-renderBookmarkIcon= (props) => {
-  this.get();
-  const exists = false;
-  if(this.get()){
-    return (
-      <TouchableOpacity
-        style={styles.iconStyle}
-        onPress={() => this.makeBookmark(props)}
-      >
-        <Icon 
-          name="md-heart"
-          size={35} 
-          color="red" 
-        />
-      </TouchableOpacity>
-    )
+  componentDidMount() {
+    AsyncStorage.getItem('bookmark')
+    .then(res => {
+      const parsedData =JSON.parse(res); 
+      this.setState(prevState => ({
+        bookmarkData: [...prevState.bookmarkData, parsedData]
+      }));
+    })
+    .catch(err => console.log(err));
   }
-  return (
-    <TouchableOpacity
-      style={styles.iconStyle}
-      onPress={() => this.makeBookmark(props)}
-    >
-      <Icon 
-        name="md-heart-outline"
-        size={35} 
-        color="red" 
-      />
-    </TouchableOpacity>
-  )
-}
-const overview = (props) => {
-  const sliderHeight = Math.round(styles.sliderHeight+20);
-  console.log(sliderHeight);
+  renderSliderImages = (images) => {
+    return images.map((eachImage, index) => {
+      return (
+        <Image
+          key={index}
+          source={{uri: eachImage}}
+          style={styles.slider}
+          resizeMode={'cover'}
+        />
+      )
+    })
+  }
+  renderSlider =(images)=>{
+       return (
+            <Swiper
+              loop={false}
+              bounces={true}
+              dot={<SliderDot />}
+              activeDot={<SliderDot active />}
+              paginationStyle={{ bottom: 5 }}
+            >
+              { this.renderSliderImages(images) }
+            </Swiper>
+          )
+  }
+  makeBookmark = (props) => {
+    const oldBookmarkData = this.state.bookmarkData;
+    const id = props.id;
+    const data = {
+      [id] : {
+        id: props.id,
+        description: props.description,
+        guide: props.guide,
+        imageUrls: props.imageUrls
+      }
+    }
+    util.set('bookmark',data)
+  }
+  renderBookmarkIcon= (props) => {
+    console.log(this.state.bookmarkData,'not')
+    if(this.state.bookmarkData) {
+      const id = props.id;
+      let isExists = this.state.bookmarkData.some(el=> {
+        return el.hasOwnProperty(id);
+      });
+      if(isExists){
+        return (
+          <TouchableOpacity
+            style={styles.iconStyle}
+            onPress={() => this.makeBookmark(props)}
+          >
+            <Icon 
+              name="md-heart"
+              size={35} 
+              color="red" 
+            />
+          </TouchableOpacity>
+        )
+      }
+      return (
+        <TouchableOpacity
+          style={styles.iconStyle}
+          onPress={() => this.makeBookmark(props)}
+        >
+          <Icon 
+            name="md-heart-outline"
+            size={35} 
+            color="red" 
+          />
+        </TouchableOpacity>
+      )
+    }
+  }  
+  render() {
+    const sliderHeight = Math.round(styles.sliderHeight+20);
     return (
       <ParallaxScrollView
         backgroundColor="#fff"
@@ -99,8 +117,8 @@ const overview = (props) => {
         parallaxHeaderHeight={sliderHeight}
         renderForeground={() => (
           <View style={styles.sliderContainer}>
-            {this.renderSlider(props.imageUrls) }
-            {this.renderBookmarkIcon(props)}
+            {this.renderSlider(this.props.imageUrls) }
+            {this.renderBookmarkIcon(this.props)}
           </View>
         )}
       >
@@ -110,12 +128,13 @@ const overview = (props) => {
                         { ` ${'Description'}` }
                   </TextSpaced>
                   <Text style={styles.text}>
-                        { props.description }
+                        { this.props.description }
                   </Text>
               </View>
         </ScrollView>
     </ParallaxScrollView>
   )
+  }
 }
 
 export default overview;

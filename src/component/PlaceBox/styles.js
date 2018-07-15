@@ -55,7 +55,6 @@ export default {
 
   text: {
     textAlign: "center",
-    fontFamily: themeFont,
     fontSize: primaryFontSize,
     color: primaryFontColor
   }

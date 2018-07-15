@@ -5,7 +5,8 @@ import {
   StyleSheet,
   FlatList,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  Animated, Easing
 } from "react-native";
 import styles from "./styles";
 import ActionButton from "react-native-action-button";
@@ -16,6 +17,7 @@ import propTypes from "prop-types";
 import { Actions } from "react-native-router-flux";
 import { getDivisionList } from "../../store/actions";
 import { themeColor } from "../../styles/globalStyles";
+import LottieView from 'lottie-react-native';
 
 class HomeScreen extends Component {
   handleViewRef = ref => (this.view = ref);
@@ -24,15 +26,18 @@ class HomeScreen extends Component {
     this.state = {
       divList: null
     };
+    this.state = {
+      progress: new Animated.Value(0),
+    };
   }
 
   componentDidMount() {
     this.props.getDivList();
-    this.view
-      .slideInUp(1000)
-      .then(endState =>
-        console.log(endState.finished ? "bounce finished" : "bounce cancelled")
-      );
+    Animated.timing(this.state.progress, {
+      toValue: 1,
+      duration: 1000,
+      easing: Easing.linear,
+    }).start();
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.divisionList !== prevState.divList) {
@@ -59,18 +64,33 @@ class HomeScreen extends Component {
         </View>
       </TouchableOpacity>
     );
-  };
+  }
+  renderList = () => {
+    if(this.state.divList) {
+      return (
+        <FlatList
+        data={this.state.divList}
+        keyExtractor={this._keyExtractor}
+        renderItem={({ item }) => this.renderDistrict({ item })}
+      />
+      )
+    }
+    return (
+        <LottieView
+          progress={this.state.progress}
+          source={require('../../assets/loader.json')}
+        />
+    );
+  }
   _keyExtractor = (item, index) => item.id;
   render() {
     return (
       <View style={styles.container}>
-        <Animatable.View ref={this.handleViewRef} style={styles.container}>
-          <FlatList
-            data={this.state.divList}
-            keyExtractor={this._keyExtractor}
-            renderItem={({ item }) => this.renderDistrict({ item })}
-          />
-        </Animatable.View>
+        <View 
+          style={styles.container}
+        >
+         {this.renderList()}
+        </View>
         <ActionButton buttonColor={themeColor}>
           <ActionButton.Item
             buttonColor="#3498db"

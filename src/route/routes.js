@@ -16,7 +16,7 @@ import {
 const routes = props => {
   return (
     <Router
-      navigationBarStyle={{ backgroundColor: "#fff",justifyContent: 'center'}}
+      navigationBarStyle={{ backgroundColor: "#fff"}}
       titleStyle={{
         textAlign:'center', 
         alignSelf:'center',
@@ -35,6 +35,7 @@ const routes = props => {
             component={INScreen} 
           />
           <Scene
+            initial
             title="Home"
             key="home_screen"
             component={HomeScreen}
