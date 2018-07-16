@@ -47,7 +47,6 @@ export const getAllBookmarkPlace = () => {
   return (dispatch) => {
     AsyncStorage.getItem('bookmark').then(res => {
       const parsedData = JSON.parse(res);
-      console.log(parsedData, 'parsed')
       dispatch({ type: FETCH_PLACE_FROM_BOOKMARK, payload: parsedData});
     });
   }

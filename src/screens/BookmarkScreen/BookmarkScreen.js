@@ -29,22 +29,22 @@ class BookmarkScreen extends Component {
   }
   renderPlaceList = () => {
     if (this.state.placeInfo) { 
-      console.log(this.state.placeInfo,'info');    
+      
       return this.state.placeInfo.map(eachPlace => {
         for (var key in eachPlace) {
-            console.log(eachPlace[key],'bookmark screen');
+            
            return (
                 <PlaceBox
                     key={eachPlace[key].id}
                     place={eachPlace[key]}
                     onPress={() => {
-                    Actions.push('description_screen',{
-                        imageUrls: eachPlace[key].imageUrls, 
-                        desc: eachPlace[key].desc, 
-                        guide: eachPlace[key].guide,
-                        id: eachPlace[key].id
-                        })
-                    }}  
+                      Actions.push('description_screen',{
+                          imageUrls: eachPlace[key].imageUrls, 
+                          desc: eachPlace[key].description, 
+                          guide: eachPlace[key].guide,
+                          id: eachPlace[key].id
+                          })
+                      }}  
                 />
             );
         }
@@ -67,7 +67,6 @@ BookmarkScreen.propTypes = {
 
 const mapStateToProps = ({ info }) => {
   const placesList = info.bookmarkedPlaces;
-  console.log(placesList,'single place')
   return {
     placesList
   };

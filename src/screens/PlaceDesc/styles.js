@@ -43,7 +43,6 @@ export default {
         text: {
           marginLeft: 8,
           marginRight: 8,
-          fontFamily,
           fontSize: primaryFontSize,
           lineHeight: 24,
           color: primaryFontColor

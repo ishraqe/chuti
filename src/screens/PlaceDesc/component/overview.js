@@ -7,7 +7,8 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  AsyncStorage
+  AsyncStorage,
+  ToastAndroid
 } from 'react-native';
 import TextSpaced from 'react-native-letter-spacing';
 import Swiper from 'react-native-swiper';
@@ -22,16 +23,25 @@ class overview extends Component {
     super(props);
     this.state = {
       bookmarkData : [],
+      hasBookmarkData: false,
       isBookmarked: false
     }
   }
   componentDidMount() {
     AsyncStorage.getItem('bookmark')
     .then(res => {
-      const parsedData =JSON.parse(res); 
-      this.setState(prevState => ({
-        bookmarkData: [...prevState.bookmarkData, parsedData]
-      }));
+      const parsedData =JSON.parse(res);
+      console.log(parsedData,'parsed', 'did mount');
+      if (_.isEmpty(parsedData)) {
+        this.setState({
+          hasBookmarkData: false
+        });
+      }else {
+        this.setState(prevState => ({
+          bookmarkData: [...prevState.bookmarkData, parsedData],
+          hasBookmarkData: true
+        }));
+      }
     })
     .catch(err => console.log(err));
   }
@@ -73,16 +83,17 @@ class overview extends Component {
       }
     }
     let updateData = [...oldBookmarkData,newdata];
-    util.set('bookmark',updateData);
+    util.set('bookmark',updateData).then(el => console.log(el));
   }
   renderBookmarkIcon= (props) => {
-    console.log(this.state.bookmarkData,'not')
-    if(typeof this.state.bookmarkData !== 'undefined' && this.state.bookmarkData.length > 0) {
+    if(this.state.hasBookmarkData) {
       const id = props.id;
-      let isExists = this.state.bookmarkData.some(el=> {
-        return el.hasOwnProperty(id);
+      let isExists = this.state.bookmarkData.some((el,i)=> {
+        return el[i].hasOwnProperty(id);
       });
+      console.log(isExists,'is exists');
       if(isExists){
+        console.log('inside true');
         return (
           <TouchableOpacity
             style={styles.iconStyle}
@@ -95,7 +106,25 @@ class overview extends Component {
             />
           </TouchableOpacity>
         )
+      } else {
+        console.log('inside false');
+
+        return (
+          <TouchableOpacity
+            style={styles.iconStyle}
+            onPress={() => this.makeBookmark(props)}
+          >
+            <Icon 
+              name="md-heart-outline"
+              size={35} 
+              color="red" 
+            />
+          </TouchableOpacity>
+        )
       }
+    } else {
+      console.log('outside true');
+
       return (
         <TouchableOpacity
           style={styles.iconStyle}
@@ -109,18 +138,6 @@ class overview extends Component {
         </TouchableOpacity>
       )
     }
-    return (
-      <TouchableOpacity
-        style={styles.iconStyle}
-        onPress={() => this.makeBookmark(props)}
-      >
-        <Icon 
-          name="md-heart-outline"
-          size={35} 
-          color="red" 
-        />
-      </TouchableOpacity>
-    )
   }  
   render() {
     const sliderHeight = Math.round(styles.sliderHeight+20);
