@@ -8,6 +8,7 @@ import { activeOpacity } from "../../styles/globalStyles";
 
 const PlaceBox = props => {
   const { name, imageUrls } = props.place;
+  console.log(typeof props,'box');
   return (
     <TouchableOpacity 
       activeOpacity={activeOpacity} 

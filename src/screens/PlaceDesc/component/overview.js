@@ -22,7 +22,7 @@ class overview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bookmarkData : [],
+      bookmarkData : null,
       hasBookmarkData: false,
       isBookmarked: false
     }
@@ -38,7 +38,7 @@ class overview extends Component {
         });
       }else {
         this.setState(prevState => ({
-          bookmarkData: [...prevState.bookmarkData, parsedData],
+          bookmarkData: parsedData,
           hasBookmarkData: true
         }));
       }
@@ -71,7 +71,8 @@ class overview extends Component {
           )
   }
   makeBookmark = (props) => {
-    const oldBookmarkData = this.state.bookmarkData;
+    let oldBookmarkData = this.state.bookmarkData;
+    console.log(oldBookmarkData,'old data');
     const id = props.id;
     const newdata = {
       [id] : {
@@ -81,19 +82,25 @@ class overview extends Component {
         imageUrls: props.imageUrls,
         name:props.placename
       }
-    }
-    let updateData = [...oldBookmarkData,newdata];
-    util.set('bookmark',updateData).then(el => console.log(el));
+    };
+    oldBookmarkData.push(newdata);
+    console.log(oldBookmarkData, 'with new')
+    AsyncStorage.setItem('bookmark',JSON.stringify(oldBookmarkData))
+    .then(res => {
+      console.log('set', console.log(res));
+    })
+    .catch(err => console.log(err));
   }
   renderBookmarkIcon= (props) => {
     if(this.state.hasBookmarkData) {
+      console.log(this.state.bookmarkData,'data');
       const id = props.id;
       let isExists = this.state.bookmarkData.some((el,i)=> {
-        return el[i].hasOwnProperty(id);
+        console.log(el.hasOwnProperty(id));
+        return el.hasOwnProperty(id);
       });
       console.log(isExists,'is exists');
       if(isExists){
-        console.log('inside true');
         return (
           <TouchableOpacity
             style={styles.iconStyle}

@@ -32,6 +32,7 @@ class PlaceListScreen extends Component {
     if (this.state.placeInfo) { 
       console.log(this.state.placeInfo,'info');     
       return this.state.placeInfo.map(eachPlace => {
+        console.log(eachPlace,'list')
         return (
           <PlaceBox
             key={eachPlace.id}

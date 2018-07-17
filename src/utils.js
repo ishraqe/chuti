@@ -15,6 +15,5 @@ export default {
         console.log(json,'data to store');
         const value = JSON.stringify(json);
         return AsyncStorage.setItem(key, value);
-
     }
 }

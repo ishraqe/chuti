@@ -32,7 +32,7 @@ class BookmarkScreen extends Component {
       
       return this.state.placeInfo.map(eachPlace => {
         for (var key in eachPlace) {
-            
+            console.log(eachPlace,'e')
            return (
                 <PlaceBox
                     key={eachPlace[key].id}

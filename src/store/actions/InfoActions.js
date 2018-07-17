@@ -37,7 +37,7 @@ export const getPlacesById = id => {
             info: placesObj[key]
           })
         }
-
+        console.log(placeArray,'list by id');
         dispatch({ type: FETCH_PLACE_BY_ID, payload: placeArray});
     });
 };
@@ -47,6 +47,7 @@ export const getAllBookmarkPlace = () => {
   return (dispatch) => {
     AsyncStorage.getItem('bookmark').then(res => {
       const parsedData = JSON.parse(res);
+      console.log(parsedData,'bookmarked dats');
       dispatch({ type: FETCH_PLACE_FROM_BOOKMARK, payload: parsedData});
     });
   }
