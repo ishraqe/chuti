@@ -5,7 +5,6 @@ export default {
     flex: 1,
     backgroundColor: appBackgroundColor
   },
-
   listContainer: {
     paddingTop: 10,
     paddingBottom: 20,
@@ -14,5 +13,10 @@ export default {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between"
+  },
+  lottieView:{
+    flex: 1, 
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 };

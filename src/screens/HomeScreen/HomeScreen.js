@@ -22,10 +22,8 @@ class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      divList: null
-    };
-    this.state = {
       progress: new Animated.Value(0),
+      divList: null
     };
   }
 
@@ -76,7 +74,7 @@ class HomeScreen extends Component {
     return (
         <LottieView
           progress={this.state.progress}
-          source={require('../../assets/loader.json')}
+          source={require('../../assets/spinner.json')}
         />
     );
   }

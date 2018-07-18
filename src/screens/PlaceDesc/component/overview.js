@@ -71,7 +71,12 @@ class overview extends Component {
           )
   }
   makeBookmark = (props) => {
-    let oldBookmarkData = this.state.bookmarkData;
+    let oldBookmarkData = null ;
+    if(this.state.bookmarkData) {
+      oldBookmarkData = this.state.bookmarkData
+    } else {
+      oldBookmarkData = [];
+    }
     console.log(oldBookmarkData,'old data');
     const id = props.id;
     const newdata = {

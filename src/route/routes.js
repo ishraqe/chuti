@@ -37,7 +37,6 @@ const routes = props => {
             component={INScreen} 
           />
           <Scene
-            initial
             title="Home"
             key="home_screen"
             component={HomeScreen}
