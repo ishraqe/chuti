@@ -3,7 +3,6 @@ import {
   FETCH_PLACE_BY_ID,
   FETCH_PLACE_FROM_BOOKMARK
 } from "./types";
-import _ from "lodash";
 import firebase from 'firebase';
 import {AsyncStorage} from 'react-native';
 
@@ -28,7 +27,6 @@ export const getPlacesById = id => {
   return (dispatch) => {
     firebase.database().ref('places/').child(id)
     .on('value', snapshot => {
-        // console.log(snapshot.val());
         let placeArray = []
         const placesObj = snapshot.val();
         for(key in placesObj) {
@@ -37,7 +35,6 @@ export const getPlacesById = id => {
             info: placesObj[key]
           })
         }
-        console.log(placeArray,'list by id');
         dispatch({ type: FETCH_PLACE_BY_ID, payload: placeArray});
     });
 };
@@ -47,7 +44,6 @@ export const getAllBookmarkPlace = () => {
   return (dispatch) => {
     AsyncStorage.getItem('bookmark').then(res => {
       const parsedData = JSON.parse(res);
-      console.log(parsedData,'bookmarked dats');
       dispatch({ type: FETCH_PLACE_FROM_BOOKMARK, payload: parsedData});
     });
   }

@@ -43,10 +43,8 @@ class overview extends Component {
           bookmarkData: parsedData,
           hasBookmarkData: true
         });
-        console.log(this.state.bookmarkData,'in did');
         const id = this.props.id;
         isExists = this.state.bookmarkData.some((el,i)=> {
-          console.log(el.hasOwnProperty(id));
           return el.hasOwnProperty(id);
         });
         this.setState({

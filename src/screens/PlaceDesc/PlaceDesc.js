@@ -19,7 +19,6 @@ import {
 } from '../../styles/globalStyles';
 
 const PlaceDesc =(props) => {
-    console.log(props.placename,'desc');
     return (
         <Tabs
             tabBarPosition='bottom'

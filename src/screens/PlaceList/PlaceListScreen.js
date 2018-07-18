@@ -38,7 +38,6 @@ class PlaceListScreen extends Component {
   }
   renderPlaceList = () => {
     return this.state.placeInfo.map(eachPlace => {
-      console.log(eachPlace,'list')
       return (
         <PlaceBox
           key={eachPlace.id}
@@ -96,7 +95,6 @@ PlaceListScreen.propTypes = {
 
 const mapStateToProps = ({ info }) => {
   const placesList = info.placesById;
-  console.log(placesList,'single place')
   return {
     placesList
   };
