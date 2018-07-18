@@ -18,6 +18,9 @@ import styles from '../styles';
 import SliderDot from './sliderDot';
 import util from '../../../utils';
 
+let isExists = false;
+const sliderHeight = Math.round(styles.sliderHeight+20);
+
 class overview extends Component {
   constructor(props) {
     super(props);
@@ -31,16 +34,24 @@ class overview extends Component {
     AsyncStorage.getItem('bookmark')
     .then(res => {
       const parsedData =JSON.parse(res);
-      console.log(parsedData,'parsed', 'did mount');
       if (_.isEmpty(parsedData)) {
         this.setState({
           hasBookmarkData: false
         });
       }else {
-        this.setState(prevState => ({
+        this.setState({
           bookmarkData: parsedData,
           hasBookmarkData: true
-        }));
+        });
+        console.log(this.state.bookmarkData,'in did');
+        const id = this.props.id;
+        isExists = this.state.bookmarkData.some((el,i)=> {
+          console.log(el.hasOwnProperty(id));
+          return el.hasOwnProperty(id);
+        });
+        this.setState({
+          isBookmarked: isExists
+        })
       }
     })
     .catch(err => console.log(err));
@@ -77,7 +88,6 @@ class overview extends Component {
     } else {
       oldBookmarkData = [];
     }
-    console.log(oldBookmarkData,'old data');
     const id = props.id;
     const newdata = {
       [id] : {
@@ -89,70 +99,61 @@ class overview extends Component {
       }
     };
     oldBookmarkData.push(newdata);
-    console.log(oldBookmarkData, 'with new')
     AsyncStorage.setItem('bookmark',JSON.stringify(oldBookmarkData))
     .then(res => {
-      console.log('set', console.log(res));
+      this.setState({
+        isBookmarked: true
+      })
     })
     .catch(err => console.log(err));
   }
-  renderBookmarkIcon= (props) => {
-    if(this.state.hasBookmarkData) {
-      console.log(this.state.bookmarkData,'data');
-      const id = props.id;
-      let isExists = this.state.bookmarkData.some((el,i)=> {
-        console.log(el.hasOwnProperty(id));
-        return el.hasOwnProperty(id);
-      });
-      console.log(isExists,'is exists');
-      if(isExists){
-        return (
-          <TouchableOpacity
-            style={styles.iconStyle}
-            onPress={() => this.makeBookmark(props)}
-          >
-            <Icon 
-              name="md-heart"
-              size={35} 
-              color="red" 
-            />
-          </TouchableOpacity>
-        )
-      } else {
-        console.log('inside false');
-
-        return (
-          <TouchableOpacity
-            style={styles.iconStyle}
-            onPress={() => this.makeBookmark(props)}
-          >
-            <Icon 
-              name="md-heart-outline"
-              size={35} 
-              color="red" 
-            />
-          </TouchableOpacity>
-        )
+  removeBookmark = (props) => {
+    const id = props.id;
+    const data = this.state.bookmarkData;
+    const updatedData = data.filter(el => {
+      for(e in el) {
+       return e != id;
       }
-    } else {
-      console.log('outside true');
-
+    });
+    AsyncStorage.removeItem('bookmark',(err=> {
+      AsyncStorage.setItem('bookmark',JSON.stringify(updatedData))
+      .then(res => {
+        this.setState({
+          isBookmarked: false
+        })
+      })
+      .catch(err => console.log(err));
+    }));
+  };
+  renderBookmarkIcon= (props) => {
+    if(this.state.isBookmarked) {
       return (
         <TouchableOpacity
           style={styles.iconStyle}
-          onPress={() => this.makeBookmark(props)}
+          onPress={() => this.removeBookmark(props)}
         >
           <Icon 
-            name="md-heart-outline"
+            name="md-heart"
             size={35} 
             color="red" 
           />
         </TouchableOpacity>
       )
     }
+    return (
+      <TouchableOpacity
+        style={styles.iconStyle}
+        onPress={() => this.makeBookmark(props)}
+      >
+        <Icon 
+          name="md-heart-outline"
+          size={35} 
+          color="red" 
+        />
+      </TouchableOpacity>
+    )
   }  
   render() {
-    const sliderHeight = Math.round(styles.sliderHeight+20);
     return (
       <ParallaxScrollView
         backgroundColor="#fff"
