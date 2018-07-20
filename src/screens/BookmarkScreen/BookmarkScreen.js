@@ -29,7 +29,6 @@ class BookmarkScreen extends Component {
   }
   renderPlaceList = () => {
     if (this.state.placeInfo) { 
-      
       return this.state.placeInfo.map(eachPlace => {
         for (var key in eachPlace) {
            return (
@@ -49,6 +48,7 @@ class BookmarkScreen extends Component {
         }
       });
     }
+    return <Text style={styles.text}>No bookmarked places found</Text>
   };
   render() {
     return (

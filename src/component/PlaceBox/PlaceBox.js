@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { View, Image, TouchableOpacity } from "react-native";
-import TextSpaced from "react-native-letter-spacing";
+import { View, Image, TouchableOpacity, Text } from "react-native";
 
 import styles from "./styles";
 import { activeOpacity } from "../../styles/globalStyles";
@@ -17,9 +16,9 @@ const PlaceBox = props => {
       <View style={styles.container}>
         <Image source={{uri: imageUrls[0]}} style={styles.image} resizeMode={"cover"} />   
         <View style={styles.textContainer}>
-          <TextSpaced style={styles.text}>
+          <Text style={styles.text}>
             {name}
-          </TextSpaced>
+          </Text>
         </View>
       </View>
     </TouchableOpacity>

@@ -1,14 +1,12 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {
   View,
   Text,
   Image,
   ScrollView,
   TouchableOpacity,
-  AsyncStorage,
-  ToastAndroid
+  AsyncStorage
 } from 'react-native';
 import TextSpaced from 'react-native-letter-spacing';
 import Swiper from 'react-native-swiper';
@@ -16,7 +14,8 @@ import Icon from "react-native-vector-icons/Ionicons";
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import styles from '../styles';
 import SliderDot from './sliderDot';
-import util from '../../../utils';
+import Toast, {DURATION} from 'react-native-easy-toast';
+
 
 let isExists = false;
 const sliderHeight = Math.round(styles.sliderHeight+20);
@@ -102,6 +101,7 @@ class overview extends Component {
       this.setState({
         isBookmarked: true
       })
+      this.refs.toast.show('Bookmarked!!');
     })
     .catch(err => console.log(err));
   }
@@ -119,6 +119,7 @@ class overview extends Component {
         this.setState({
           isBookmarked: false
         })
+        this.refs.toast.show('Bookmark removed!!');
       })
       .catch(err => console.log(err));
     }));
@@ -174,9 +175,19 @@ class overview extends Component {
                   </Text>
               </View>
         </ScrollView>
+        <Toast 
+          position='top'
+          positionValue={200}
+          fadeInDuration={750}
+          fadeOutDuration={1000}
+          opacity={0.8}
+          textStyle={{color:'red'}}
+          ref="toast"
+        />
     </ParallaxScrollView>
   )
   }
 }
+
 
 export default overview;

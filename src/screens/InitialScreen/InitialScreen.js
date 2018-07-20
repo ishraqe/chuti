@@ -20,9 +20,10 @@ class InitialScreen extends Component {
       <View style={styles.container}>
           <Video  
             muted={false}   
-            repeat={true}   
+            repeat={false}   
             source={bgVideo}
-            resizeMode="cover" style={StyleSheet.absoluteFill} 
+            resizeMode="cover" 
+            style={StyleSheet.absoluteFill} 
           />
           <View style={styles.logoContainer}>
             <View style={styles.nameContainer}>

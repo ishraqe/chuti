@@ -18,5 +18,12 @@ export default {
     flex: 1, 
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  bgContainer: {
+    flex: 1
+  },
+  contentContainer: {
+    flex:1,
+    position: 'absolute'
   }
 };

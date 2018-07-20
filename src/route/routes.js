@@ -19,17 +19,18 @@ const routes = props => {
   return (
     <Router
       navigationBarStyle={{ backgroundColor: "#fff"}}
-      titleStyle={{
-        textAlign:'center', 
-        alignSelf:'center',
-        flex:1,
-        fontFamily: themeFont,
-        fontWeight: "normal",
-        color: primaryFontColor,
-        fontSize: navFontSize
-      }}
     >
-      <Stack key="root" hideNavBar={true}>
+      <Stack key="root" hideNavBar={true}
+        titleStyle={{
+          flex:1,
+          textAlign:'center', 
+          alignSelf:'center',
+          fontFamily: themeFont,
+          fontWeight: "normal",
+          color: primaryFontColor,
+          fontSize: navFontSize,
+        }}
+      >
         <Stack key="first">
           <Scene 
             key="initial_screen" 
@@ -45,16 +46,46 @@ const routes = props => {
             title="Popular Places"
             key="placeList_screen"
             component={PlaceListScreen}
+            titleStyle= {{
+              flex:1,
+              textAlign:'center', 
+              alignSelf:'center',
+              fontFamily: themeFont,
+              fontWeight: "normal",
+              color: primaryFontColor,
+              fontSize: navFontSize,
+              marginLeft: -5
+            }}
           />
           <Scene
             title="Description"
             key="description_screen"
             component={PlaceDesc}
+            titleStyle={{
+              flex:1,
+              textAlign:'center', 
+              alignSelf:'center',
+              fontFamily: themeFont,
+              fontWeight: "normal",
+              color: primaryFontColor,
+              fontSize: navFontSize,
+              marginLeft: -5
+            }}
           />
           <Scene
             title="Bookmarks"
             key="bookmark_screen"
             component={BookmarkScreen}
+            titleStyle={{
+              flex:1,
+              textAlign:'center', 
+              alignSelf:'center',
+              fontFamily: themeFont,
+              fontWeight: "normal",
+              color: primaryFontColor,
+              fontSize: navFontSize,
+              marginLeft: -5
+            }}
           />
         </Stack>
       </Stack>

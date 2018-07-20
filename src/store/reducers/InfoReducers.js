@@ -21,6 +21,7 @@ export default (state = INITIAL_STATE, action) => {
     case FETCH_PLACE_BY_ID:
       return { ...state, placesById: action.payload };
     case FETCH_PLACE_FROM_BOOKMARK:
+    console.log(action.payload)
     return { ...state, bookmarkedPlaces: action.payload };  
     default:
       return state;
