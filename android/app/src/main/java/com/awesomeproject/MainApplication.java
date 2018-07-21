@@ -11,6 +11,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.brentvatne.react.ReactVideoPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
+import com.apsl.versionnumber.RNVersionNumberPackage;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,7 +30,8 @@ public class MainApplication extends Application implements ReactApplication {
             new SvgPackage(),
             new VectorIconsPackage(),
             new ReactVideoPackage(),
-            new LottiePackage()
+            new LottiePackage(),
+            new RNVersionNumberPackage()
       );
     }
 

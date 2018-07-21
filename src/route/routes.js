@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
-import { Router, Scene, Stack } from "react-native-router-flux";
+import { Router, Scene, Stack, Actions } from "react-native-router-flux";
 
 import INScreen from "../screens/InitialScreen/InitialScreen";
 import HomeScreen from "../screens/HomeScreen/HomeScreen";
 import PlaceListScreen from "../screens/PlaceList/PlaceListScreen";
 import PlaceDesc from '../screens/PlaceDesc/PlaceDesc';
 import BookmarkScreen from '../screens/BookmarkScreen/BookmarkScreen';
+import AboutScreen from '../screens/AboutScreen/AboutScreen';
 
 
 import {
@@ -29,6 +30,7 @@ const routes = props => {
           fontWeight: "normal",
           color: primaryFontColor,
           fontSize: navFontSize,
+          marginLeft: -5
         }}
       >
         <Stack key="first">
@@ -40,6 +42,7 @@ const routes = props => {
           <Scene
             title="Home"
             key="home_screen"
+            left={()=>null}
             component={HomeScreen}
           />
           <Scene
@@ -85,6 +88,14 @@ const routes = props => {
               color: primaryFontColor,
               fontSize: navFontSize,
               marginLeft: -5
+            }}
+          />
+          <Scene 
+            key="about_screen" 
+            component={AboutScreen} 
+            navigationBarStyle={{ backgroundColor: "#fff", elevation: 0}}
+            onLeft={()=>{
+              Actions.pop();
             }}
           />
         </Stack>

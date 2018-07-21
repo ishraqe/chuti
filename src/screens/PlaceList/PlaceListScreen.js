@@ -84,6 +84,13 @@ class PlaceListScreen extends Component {
           >
             <Icon name="tag" size={35} color="#fff" />
           </ActionButton.Item>
+          <ActionButton.Item
+            buttonColor="#2ecc71"
+            title="About"
+            onPress={() => {Actions.push('about_screen')}}
+          >
+            <Icon name="user" size={35} color="#fff" />
+          </ActionButton.Item>
         </ActionButton>
       </View>
     );
