@@ -1,74 +1,72 @@
-# The Book of Spices
-![Preview](./artwork/banner.jpg)
+# Chuti Travel Group
+![Preview](./src/assets/git-assets/02.jpg)
 
-#### An educational app to help you learn about spices, built on top of react-native. 
-[![Preview](./artwork/play.png)](https://play.google.com/store/apps/details?id=com.thebookofspices)
+#### An app to help bangldeshi travellers, built on top of react-native. 
+
+## Use cases
+This app describes tourist spots of Bangladesh and how to go there, with the aim of helping the travellers around Bangladesh
+
+
+In popular places view you can review all the places and can press on them to view the detailed screen. All the data are coming from firebase .
+
+
+Download the APK : [Installable APK](https://github.com/ishraqe/chuti/raw/master/apk/app-release.apk)
+
+## How to create your own copy of this app?
+### Prerequisites
+To create an own copy of this application, you have some prerequisites. They are -
+
+ - [NodeJS](https://nodejs.org/en/) installed on your system.
+ - [React Native](https://facebook.github.io/react-native/) installed on your system.
+ - Have the [Android SDK](https://developer.android.com/studio/index.html) and paths set properly. 
+ - An android emulator or real device to run the app.
+ - A google account for having [Firebase Web](https://firebase.google.com/docs/web/setup) configuration.
+
+
+### Make own copy
+First clone the repository using:
+
+    git clone https://github.com/ishraqe/chuti.git
+
+Then install the dependencies using:
+
+    npm install
+
+At this point you need to have the configurations for a Firebase App. Just go to [Firebase Console](https://firebase.google.com/docs/web/setup) and follow the instructions. Then open the file named `App.js` from the `src` folder. Add the Firebase configurations to the file. The file looks something like this:
+
+    // import and configure firebase
+    import  firebase from 'firebase';
+    
+    const firebaseConfig = {
+      apiKey: [YOUR API KEY],
+      authDomain: [YOUR AUTH DOMAIN],
+      databaseURL: [YOUR DATABASE URL],
+      storageBucket: [STORAGE BUCKET],
+    }
+    export const firebaseApp = firebase.initializeApp(firebaseConfig)
+
+ Run the following command to run the app on the emulator.
+
+    react-native run-android
+Now, you have your own copy of this application!
+
+## License
+Do anything you wanna do!
+
+## Credits
+All credit goes to all library creators and contributors to those libraries and those awesome people from whome i have collected contents from.
 
 ## Built With
 The project is built on top of react-native using the following major libraries:
-* [wix/react-native-navigation](https://wix.github.io/react-native-navigation/#/) - for a purely native navigation system
+* [react-native-router-flux](https://github.com/aksonov/react-native-router-flux) - for a navigation system
 * [redux](https://redux.js.org/) - for state management
+* [Firebase](https://firebase.google.com/) - for storage and database
 * [lottie-react-native](https://github.com/airbnb/lottie-react-native) - for beautiful animations
 * [react-native-animatable](https://github.com/oblador/react-native-animatable) - for animating text and views
 * [react-native-swiper](https://github.com/leecade/react-native-swiper) - for swiping through images
-* [lodash](https://lodash.com/) - for many utility stuffs
+* [react-native-action-button](https://github.com/mastermoo/react-native-action-button) - for the floating action button
+* [react-native-easy-toast](https://github.com/crazycodeboy/react-native-easy-toast) - for toast message
 
-## Use cases
-This app can serve you a base for any educational application. You can easily change contents from very simplified JS object based database. The test module will automatically generate random questionnaire with multiple choice options. Please feel free to make pull requests, issues and improvement suggestions.
 
-## Walkthrough
-### Learning Views
-
-![Preview](./artwork/learn.gif)
-
-In learning view you can review all the spices and can press on them to view the detailed screen. All the data are coming from `src/DB/spices.js`.
-
-### Testing Skill Views
-
-![Preview](./artwork/test.gif)
-
-In Test view, there will be multiple choice options with randomly generated questionnaire. The questionnaire and multiple choice options are prepared using some bespoke utility function (available on `src/utils/preapreQuestionnaire.js`) with help from `lodash` library. The animations are done using `lottie-react-native` and `react-native-animatable`. Also there is a little drama added for calculating the result! 😁
-
-## Development
-Install dependencies with yarn.
-```
-yarn install
-```
-
-For starting the project or starting the react native bundler, use the following command:
-```
-yarn start
-```
-
-Then you can run the app on ios/android using react-native commands:
-```
-react-native run-ios
-react-native run-android
-```
-
-Make sure you have [nodeJS](https://nodejs.org/en/), [yarn](https://yarnpkg.com/en/), [react-native-cli](https://www.npmjs.com/package/react-native-cli), [Xcode](https://developer.apple.com/xcode/), and [Android Studio](https://developer.android.com/studio/index.html) installed on your machine.
-
-#### Caution
-Please do not use arrow functions for react's lifecycle functions like `componentDidMount`, `componentWillMount` etc. This breaks the hot module patching for regarding screens. It's a bug from `wix/react-native-navigation` library.
-```js
-// incorrect
-componentDidMount = () => {
-  // do something
-}
-
-// correct
-componentDidMount() {
-  // do something
-}
-```
-
-## License
-[MIT License](https://github.com/shoumma/Book-of-Spices/blob/master/LICENSE). Anything!
-
-## Credits
-All credit goes to all library creators and contributors to those libraries. Me and my team is grateful to them.
-
-Made with ❤️ by team [aspro.io](https://www.aspro.io/)
-
-[Provash Shoumma](https://twitter.com/pshoumma)
+Made with ❤️ by [Ishraqe Manjur](https://twitter.com/ishraqe_manjur)
 
