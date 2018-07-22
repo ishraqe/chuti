@@ -29,7 +29,7 @@ class InitialScreen extends Component {
               <Image 
                 source={require('../../assets/logo1.png')}
                 style={styles.logo}
-              />
+              /> 
           </View>
       </View>
     )
