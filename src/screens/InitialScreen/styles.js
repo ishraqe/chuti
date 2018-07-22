@@ -18,25 +18,16 @@ const styles = StyleSheet.create({
     logoContainer: {
         position: 'absolute',
         zIndex: 1,
-        backgroundColor: 'rgba(0,0,0,0.4)',
+        // backgroundColor: 'rgba(0,0,0,0.4)',
         height: height,
         width:width,
         justifyContent: 'center',
         alignItems: 'center'
 
     },
-    nameContainer: {
-        backgroundColor: 'rgba(255,255,255,0.2)',
-        height: width-80,
-        width: width-80,
-        borderRadius: (width-80)/2,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    name: {
-        fontFamily: themeFont,
-        color: '#42f4d7',
-        fontSize: primaryFontSize + 30
+    logo: {
+        height: height /2,
+        width: width - 50
     }
 });
 

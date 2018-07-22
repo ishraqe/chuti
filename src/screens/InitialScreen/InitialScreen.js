@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { View, Text, StatusBar , StyleSheet} from "react-native";
+import { View, Text, StatusBar , StyleSheet, Image} from "react-native";
 import Video from "react-native-video";
 import {Actions} from 'react-native-router-flux';
 import bgVideo from '../../assets/video.mp4';
@@ -26,9 +26,10 @@ class InitialScreen extends Component {
             style={StyleSheet.absoluteFill} 
           />
           <View style={styles.logoContainer}>
-            <View style={styles.nameContainer}>
-              <Text style={styles.name}>Chuti</Text>
-            </View>
+              <Image 
+                source={require('../../assets/logo1.png')}
+                style={styles.logo}
+              />
           </View>
       </View>
     )
