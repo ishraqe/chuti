@@ -3,6 +3,7 @@ import { View, Text, StatusBar , StyleSheet, Image} from "react-native";
 import Video from "react-native-video";
 import {Actions} from 'react-native-router-flux';
 import bgVideo from '../../assets/video.mp4';
+import logo from '../../assets/logo1.png';
 import styles from './styles';
 
 class InitialScreen extends Component {
@@ -27,7 +28,7 @@ class InitialScreen extends Component {
           />
           <View style={styles.logoContainer}>
               <Image 
-                source={require('../../assets/logo1.png')}
+                source={logo}
                 style={styles.logo}
               /> 
           </View>

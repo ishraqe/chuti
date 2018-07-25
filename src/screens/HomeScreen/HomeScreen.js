@@ -5,7 +5,7 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-  Animated, Easing, BackHandler
+  BackHandler
 } from "react-native";
 import styles from "./styles";
 import ActionButton from "react-native-action-button";
@@ -22,21 +22,20 @@ class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      progress: new Animated.Value(0),
       divList: null
     };
   }
 
   componentDidMount() {
     this.props.getDivList();
-    Animated.timing(this.state.progress, {
-      toValue: 1,
-      duration: 1000,
-      easing: Easing.linear,
-    }).start();
-    this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      BackHandler.exitApp();
-      return true;
+    this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => { 
+      if(Actions.currentScene === 'home_screen') {
+        BackHandler.exitApp();
+        return false;
+      }else {
+        Actions.pop();
+        return true // do not exit app
+      }
     });
   }
   componentWillUnmount() {

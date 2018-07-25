@@ -1,6 +1,7 @@
 import { 
   FETCH_DIVISION_LIST,
   FETCH_PLACE_BY_ID,
+  REMOVE_PLACES_BY_ID,
   FETCH_PLACE_FROM_BOOKMARK
 } from "./types";
 import firebase from 'firebase';
@@ -39,6 +40,12 @@ export const getPlacesById = id => {
     });
 };
 };
+
+export const removePlacesByID = () => {
+  return (dispatch) => {
+    dispatch({ type: REMOVE_PLACES_BY_ID, payload: null});
+  }
+}
 
 export const getAllBookmarkPlace = () => {
   return (dispatch) => {

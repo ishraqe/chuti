@@ -9,11 +9,10 @@ import {
 } from 'react-native';
 
 import Tabs from 'react-native-scrollable-tab-view';
-import {BoxShadow} from 'react-native-shadow';
+import {Actions} from 'react-native-router-flux';
 import Overview from './component/overview';
 import Path from './component/path';
 import {
-     appBackgroundColor, 
      themeColor, 
      themeFont
 } from '../../styles/globalStyles';

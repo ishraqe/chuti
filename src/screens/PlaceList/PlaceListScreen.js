@@ -5,7 +5,7 @@ import ActionButton from "react-native-action-button";
 import Icon from "react-native-vector-icons/EvilIcons";
 import { View, ScrollView, Animated, Easing } from "react-native";
 import PlaceBox from "../../component/PlaceBox/PlaceBox";
-import { getPlacesById } from "../../store/actions";
+import { getPlacesById, removePlacesByID } from "../../store/actions";
 import styles from "./styles";
 import { Actions } from "react-native-router-flux";
 import LottieView from 'lottie-react-native';
@@ -27,6 +27,9 @@ class PlaceListScreen extends Component {
       duration: 1000,
       easing: Easing.linear,
     }).start();
+  }
+  componentWillUnmount() {
+    this.props.removePlacesList();
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.placesList !== prevState.placeInfo) {
@@ -109,7 +112,8 @@ const mapStateToProps = ({ info }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPlacesList: id => dispatch(getPlacesById(id))
+    getPlacesList: id => dispatch(getPlacesById(id)),
+    removePlacesList: () => dispatch(removePlacesByID())
   };
 };
 
