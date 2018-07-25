@@ -32,12 +32,10 @@ class App extends Component {
       isConnected: true
     }
     const config = {
-      apiKey: "AIzaSyARtwl6wJgu3NYGxZcMTlo7gAcHSBNQ-eg",
-      authDomain: "chuti-acdbc.firebaseapp.com",
-      databaseURL: "https://chuti-acdbc.firebaseio.com",
-      projectId: "chuti-acdbc",
-      storageBucket: "chuti-acdbc.appspot.com",
-      messagingSenderId: "683534495402"
+      apiKey: [YOUR API KEY],
+      authDomain: [YOUR AUTH DOMAIN],
+      databaseURL: [YOUR DATABASE URL],
+      storageBucket: [STORAGE BUCKET],
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
