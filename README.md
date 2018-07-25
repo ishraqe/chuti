@@ -2,6 +2,7 @@
 ![Preview](./src/assets/git-assets/02.jpg)
 
 #### An app to help bangldeshi travellers, built on top of react-native. 
+[![Preview](./src/assets/git-assets/play.png)](https://play.google.com/store/apps/details?id=com.chutitravelgroup)
 
 ## Use cases
 This app describes tourist spots of Bangladesh and how to go there, with the aim of helping the travellers around Bangladesh
