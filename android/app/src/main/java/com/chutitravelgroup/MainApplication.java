@@ -1,4 +1,4 @@
-package com.awesomeproject;
+package com.chutitravelgroup;
 
 import android.app.Application;
 

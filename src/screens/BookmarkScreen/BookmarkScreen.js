@@ -48,7 +48,11 @@ class BookmarkScreen extends Component {
         }
       });
     }
-    return <Text style={styles.text}>No bookmarked places found</Text>
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={styles.text}>No bookmarked places found</Text>
+      </View>
+    )
   };
   render() {
     return (

@@ -24,6 +24,7 @@ export default {
     fontFamily: themeFont,
     fontWeight: "normal",
     color: themeColor,
-    fontSize: navFontSize
+    fontSize: navFontSize,
+    alignSelf: 'center'
   }
 };
